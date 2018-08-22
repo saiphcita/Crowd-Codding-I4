@@ -1,0 +1,131 @@
+.App {
+  text-align: center;
+  height: 100%;
+}
+
+
+.Bar-header {
+  background-color: #333333;
+  padding: 1%;
+  height: 8%;
+  color: white;
+  text-align: left;
+}
+.Emailside {
+  display: inline;
+  position: relative;
+}
+.ButtonLogOut {
+  display: inline;
+  position: relative;
+  left: 74%;
+}
+
+
+.divAPC {
+  height: 92%;
+}
+
+
+.aside {
+  background-color: #007acc;
+  float: left;
+  width: 15%;
+  color: black;
+  height: 100%;
+}
+
+.collapseEstilo {
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  height: 92.7%;
+}
+.buttonBack {
+  margin: 5px  0px 0px 8px;
+  float: left;
+  height: auto;
+  background-color: white;
+}
+
+
+.DivDefinition {
+  display: inline-flex;
+  height: auto;
+  margin: 0 8% 0 12%;
+}
+.listDefiniton {
+  margin: 0 0 5% 0;
+  padding: 0;
+  background-color: aliceblue;  
+}
+.listDefiniton li {
+  text-align: left;
+  display: block;
+  padding: 8px 5px 8px 10px;
+  border: 1px solid rgba(0,0,0,.125);
+}
+.tittleList {
+  font-size: 1.3rem;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.DivAddPost{
+  float: left;
+  text-align: left;
+  margin: 1% 0 0 1%;
+  border: 1px solid greenyellow;
+  padding: 1rem;
+  width: 65.4%;
+}
+.DivAddPost input{
+  width: 94%;
+}
+.DivAddPost ul {
+  margin: 0 0 0 0;
+  padding: 0;
+  width: 90%;
+}
+.DivAddPost li {
+  text-align: left;
+  display: block;
+  padding: 5px 4px 5px 8px;
+  border: 1px solid rgba(0,0,0,.125);
+}
+
+.buttonSave {
+  margin: 1%  5% 5px 0px;
+  float: right;
+  height: auto;
+  background-color: white;
+}
+
+.DivPostCategory {
+  float: left;
+  display: inline-flex;
+  height: auto;
+  margin: 1% 0 0 1%;
+  width: 83%;
+}
+.listPC {
+  margin: 0 0 0 0;
+  padding: 0;
+}
+.listPC li {
+  text-align: left;
+  display: block;
+  padding: 8px 5px 8px 10px;
+  border: 1px solid rgba(0,0,0,.125);
+}
+.listPC select {
+  border: 0px solid;
+  font-size: 0.9rem;
+  background-color: white;
+  color: black;
+}
+.tittleListPC {
+  font-size: 1.3rem;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
