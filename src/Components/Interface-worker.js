@@ -267,9 +267,8 @@ class PostAndCategory extends Component {
                   for (let i = 0; i < TotalValores; i++) {
                     percentage[Postvalores[i]] = percentage[Postvalores[i]] ? Number(percentage[Postvalores[i]]) + 1 : 1;
                   }
-                  for (let key in percentage) {
-                    percentage[key] = Math.round(((percentage[key]/TotalValores)*100)*10) / 10;
-                  }
+                  var TotalSelectors = Object.keys(percentage).length
+                  
                   // THIS IS THE RESULT
                   if(Number(val.category) !== 0){
                     if (Postvalores.length === 0) {
@@ -281,27 +280,12 @@ class PostAndCategory extends Component {
                       <div className="StyleStatistics">
                         {
                           Object.keys(percentage).map((key, index) => {
-                            if(percentage[key] >= 45){
-                              return <div key={index} className="DivStatistics"
-                              style={{width: percentage[key]+"%", backgroundColor:"rgba(0, 172, 230,"+(percentage[key]/100)+")"}}>
-                                <p>{this.state.category[key]}</p><p>{percentage[key]+"%"}</p>
-                             </div> 
-                            }else if(percentage[key] >= 30){
-                              return <div key={index} className="DivStatistics"
-                              style={{width: percentage[key]+"%", backgroundColor:"rgba(0, 172, 230,"+(percentage[key]/100)+")"}}>
-                              <p>{this.state.category[key]}</p><p>{percentage[key]+"%"}</p>
-                             </div> 
-                            }else if(percentage[key] >= 8){
-                              return <div key={index} className="DivStatistics"
-                              style={{width: percentage[key]+"%", backgroundColor:"rgba(0, 172, 230,"+(percentage[key]/100)+")"}}>
-                              <p>{this.state.category[key]}</p><p>{percentage[key]+"%"}</p>
-                             </div> 
-                            }else{
-                              return <div key={index} className="DivStatistics"
-                              style={{width: percentage[key]+"%", backgroundColor:"rgba(0, 172, 230,"+(percentage[key]/100)+")"}}>
-                              <p>{this.state.category[key]}</p><p>{percentage[key]+"%"}</p>
-                             </div>
-                            }      
+                            return <div key={index} 
+                                        className="DivStatistics"
+                                        style={{width:(100/TotalSelectors)+"%"}}>
+                                <div style={{width:"70%"}}>{this.state.category[key]}</div>
+                                <div style={{backgroundColor:"green", width:"30%"}}>{" +"+percentage[key]}</div>
+                             </div>  
                           })
                         }  
                       </div>
