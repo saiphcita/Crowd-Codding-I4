@@ -122,7 +122,7 @@ class ChatBar extends Component {
     e.preventDefault()
     var arrayText = this.state.arrayText
     if(this.state.newText.length !== 0){
-      var addText = this.state.newText+ " BY: " + this.state.Worker
+      var addText =this.state.Worker+": "+this.state.newText
       arrayText.push(addText)
       this.setState({ newText: "" }); 
       //save in firebase the new message
@@ -131,7 +131,6 @@ class ChatBar extends Component {
   }
 
   render() {
-
     var arrayText = this.state.arrayText.map((val, i) => {
       return <div 
       key={i}
@@ -200,13 +199,20 @@ class PostAndCategory extends Component {
       <div>
         {/* SECCION DE LA CATEGORIA Y LOS POST*/}
         <div className="DivPostCategory">
+        {/* SECCION DEL NUMERO DE POSTS*/}
+        <ul className="listNumberPost" style={{width: this.state.widthPost }}>
+            <li className="tittleListPC" style={{padding:"8px 5px 8px 3px"}}>No.</li>
+                    {this.state.post.map((val, i) => {
+                      return <li key={i}>{i+1}</li>
+                    })}
+            </ul>
           {/* SECCION DE LOS POSTS*/}
           <ul className="listPost" style={{width: this.state.widthPost }}>
             <li className="tittleListPC">Post</li>
                     {this.state.post.map((val, i) => {
-                      if(val.post.length > 38){
+                      if(val.post.length > 40){
                         return <li key={i}>
-                          {val.post.substring(0,38)}... 
+                          {val.post.substring(0,40)}... 
                           <ModalExample 
                           post={val.post} 
                           ind={i+1} 

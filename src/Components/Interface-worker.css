@@ -76,28 +76,33 @@
 .DivChat {
   background-color: #efefef;
   float: left;
-  width: 320px;
+  width: 280px;
   color: black;
   height: 92%;
   text-align: center;
   font-size: 0.8rem;
 }
-.EachMessage{
-  padding: 6px 0;
-  border-bottom: 1px solid white;
-}
 .TextContianer{
   border: 0;
+  overflow: auto;
+  height: 83.7%;
+  max-height: 83.7%;
+  text-align: left
+}
+.EachMessage{
+  font-size: 0.7rem;
+  padding: 6px 4px 6px 8px;
+  border-bottom: 1px solid white;
 }
 .DivChat form {
   font-size: 0.9rem;
-  width: 320px;
+  width: 280px;
   margin: 10px 0 0 0;
   background-color: #18B68B;
-  position: absolute; bottom: 0px; 
+  /* position: absolute; bottom: 0px;  */
 }
 .DivChat input {
-  width: 260px;
+  width: 220px;
   margin: 10px 8px 24px 2px;
   border: 0;
   border-bottom: 1px solid white;
@@ -135,7 +140,7 @@
   display: inline-flex;
   height: auto;
   margin: 26px 0 0 15px;
-  width: 880px;
+  width: 920px;
 }
 .tittleListPC {
   font-size: 1.05rem;
@@ -149,6 +154,13 @@
   border: 1px solid rgba(0,0,0,.125);
   background-color: white;
   width: 100%;
+}
+
+/* NUMBER POST SECTION */
+.listNumberPost {
+  width: 35px;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 /* POST SECTION */
