@@ -1,0 +1,11 @@
+.DivSignup {
+    margin-top: 20px;
+    padding: 12px;
+    height: 200px;
+    color: white;
+    text-align: left;
+  }
+.replyErr{
+    display: inline-block;
+    color: red;
+}

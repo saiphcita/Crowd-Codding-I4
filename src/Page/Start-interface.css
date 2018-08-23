@@ -1,0 +1,37 @@
+.divStatePage { 
+    margin-top: 80px;
+    color: white;
+}
+
+.DivButton {
+    display: inline-block;
+    padding: 10px;
+    width: 320px;
+    color: white;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid rgba(0,0,0,.125);
+}
+.DivButton:hover {
+    background-color: #49A272;
+    color: white;
+}
+
+/* render */
+.DivBase{
+    text-align: center;
+    padding: 14px 0;
+    height: 100%;
+    background-color: #F2F4F4;
+}
+.DivForm{
+    display: inline-block;
+    background-color: #211D4E;
+    margin: 14px 0;
+    height: 480px;
+    width: 750px;
+    padding: 25px 30px 0 30px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+}

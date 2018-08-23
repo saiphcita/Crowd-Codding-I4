@@ -1,0 +1,58 @@
+  .DivChat {
+    background-color: #efefef;
+    float: left;
+    width: 280px;
+    color: black;
+    height: 92%;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  .TextContianer{
+    text-align: left;
+    height: 83.7%;
+    max-height: 83.7%;
+    border: 0;
+    /* para el scroll */
+    overflow: auto;
+    word-wrap: break-word;
+  }
+  .EachMessage{
+    font-size: 0.7rem;
+    padding: 6px 4px 6px 8px;
+    border-bottom: 1px solid white;
+  }
+  .DivChat form {
+    font-size: 0.9rem;
+    width: 280px;
+    margin: 10px 0 0 0;
+    background-color: #18B68B;
+    /* position: absolute; bottom: 0px;  */
+  }
+  .DivChat input {
+    width: 220px;
+    margin: 10px 8px 24px 2px;
+    border: 0;
+    border-bottom: 1px solid white;
+    background-color: inherit;
+    color: white;
+  }
+  .DivChat input:focus {
+    outline: none;
+  }
+  
+  ::placeholder {color: white;} :-ms-input-placeholder {color: white;} ::-ms-input-placeholder {color: white;}
+
+  .DivChat button {
+    color: white;
+    background-color: #2DD8AA;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.69);
+    -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.69);
+    box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.69);
+  }
+
+  .DivChat button:active { background-color: #0B7D5E; }
+
+  .DivChat button:focus { outline: none; }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import './Interface-worker.css';
 
 class ModalExample extends React.Component {
   constructor(props) {

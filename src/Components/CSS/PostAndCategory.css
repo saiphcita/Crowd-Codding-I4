@@ -1,0 +1,111 @@
+/* POST AND CATEGORY SECTION */
+.DivPostCategory {
+    float: left;
+    display: inline-flex;
+    height: auto;
+    margin: 10px 0 0 8px;
+    width: 930px;
+}
+.tittleListPC {
+    font-size: 1.05rem;
+    font-weight: bolder;
+    width: 100%;
+}
+.DivPostCategory li {
+    text-align: left;
+    display: block;
+    padding: 8px 5px 8px 10px;
+    border: 1px solid rgba(0,0,0,.225);
+    background-color: white;
+    width: 100%;
+}
+
+/* NUMBER POST SECTION */
+.listNumberPost {
+    width: 35px;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+/* POST SECTION */
+.listPost {
+    width: 415px;
+    max-width: 415px;
+    padding: 0;
+    margin-bottom: 0;
+}
+.buttonShow {
+    text-align: center;
+    float: right;  
+    font-size: 0.85rem;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    padding: 0 2px;
+    margin: 0 0 0 4px;
+    background-color: white; 
+    color: black; 
+    border: 1.2px solid rgba(0,0,0,.225);
+    border-radius: 2px;
+}
+.buttonShow:hover {
+    background-color: gray;
+    color: white;
+}
+
+/* CATEGORY SECTION */
+.listCategory {
+    width: 175px;
+    max-width: 175px;
+    padding: 0;
+    margin-bottom: 0;
+}
+.listCategory select {
+    border: 0px solid;
+    font-size: 0.8rem;
+    background-color: white;
+    color: black;
+}
+
+/* STATISTICS SECTION */
+.listStatistics {
+    width: 305px;
+    max-width: 305px;
+    padding: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+.LIstatistics {
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.noUserSelected{
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.225);
+    padding: 8px 0;
+    text-align: center;
+}
+.StyleStatistics  {
+    display: inline-flex;
+    background-color: white;
+    border: 0;
+    color: black;
+    height: 100%;
+    width: 100%;
+}
+.DivStatistics {
+    border: 1px solid rgba(0,0,0,.225);
+    font-size: 0.85rem;
+    margin: 0;
+    padding: 0;
+    height: 42px;
+    display: inline-flex;
+}
+.DivStatistics div {
+    text-align: center;
+    background-color: #F2F3F4;
+    margin: 0;
+    padding: 8px 0;
+}

@@ -5,10 +5,10 @@ import {
   Switch,
 } from 'react-router-dom'
 
-import WorkerPage from '../Components/Interface-worker';
-import StartInterface from '../Components/Start-interface';
+import WorkerPage from '../Page/Interface-worker';
+import StartInterface from '../Page/Start-interface.js';
 
-import { refAllUsers} from '../Components/DataBase.js'
+import { refAllUsers} from '../Components/Tools/DataBase.js'
 
 
 class RoutesID  extends Component {

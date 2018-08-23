@@ -1,167 +1,10 @@
 import React, { Component } from 'react';
-import './Interface-worker.css';
-import ModalExample  from './modal.js'
-import { Collapse, Button} from 'reactstrap';
+import './CSS/PostAndCategory.css';
+import ModalExample  from './Tools/modal.js'
+import SelectForCategory  from './Tools/SelectForCategory.js'
 import Icon from 'react-icons-kit';
 import {arrowUp} from 'react-icons-kit/icomoon/arrowUp'
-import { Link } from 'react-router-dom';
-import { refGeneralCategory, dbUser, refAllUsers, refChatRoom} from './DataBase.js'
-
-class EmailBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listUsers: []
-    };
-  }
-
-  componentDidMount(){
-    refAllUsers.on("value", (snapshot) => {
-        let AllUsers = snapshot.val();
-        let listOfUsers = AllUsers.map(val => {return val.User.UserInfo.Username})
-        this.setState({listUsers: listOfUsers})
-    });
-  }
-
-  render(){
-    return (
-      <header className="Bar-header">
-        <div >{this.state.listUsers[this.props.numberUser]}</div>
-        <Link to="/">
-        <div className="ButtonLogOut">Log Out</div>  
-        </Link>    
-      </header> 
-    );
-  }
-}
-
-
-class AsideBar extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = { 
-      collapse: false,
-      category: [],
-    };
-  }
-
-  componentDidMount() {
-    refGeneralCategory.on("value", (snapshot) => {
-      let category = snapshot.val();
-      this.setState({category : category})
-    });
-  }
-
-  toggle() {
-    this.setState({ collapse: !this.state.collapse });
-  }
-
-  render() {
-    return (
-      <div className="aside">
-        <Collapse isOpen={this.state.collapse} className="collapseEstilo">
-            <Button color="primary" onClick={this.toggle} className="buttonBack">Go Back</Button>
-            <div className="DivDefinition">
-              <ul className="listDefiniton">
-                <li className="tittleList">Category</li>
-                {this.state.category.map(i => {
-                  return <li key={i.categoryName}>
-                    {i.categoryName}
-                  </li>
-                })}
-              </ul>
-              <ul className="listDefiniton">
-                <li className="tittleList">Definition</li>
-                {this.state.category.map(i => {
-                  return <li key={i.categoryName}>
-                    {i.categoryDefinition}
-                  </li>
-                })}
-              </ul>
-            </div>
-        </Collapse>
-      <div className="ShowTx">
-      <div>Show the definition of the categories.</div>
-      <Button color="primary" onClick={this.toggle} style={{marginTop: "12px"}}>Show</Button>
-      </div>
-    </div>
-    );
-  }
-}
-
-
-class ChatBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      arrayText: [],
-      newText: ""
-    };
-    this.handleChangeText = this.handleChangeText.bind(this);
-  }
-
-  componentDidMount(){
-    refChatRoom.on("value", (snapshot) => {
-        let text = snapshot.val();
-        this.setState({arrayText: text})
-    });
-    var refUserID = dbUser.ref("Users/"+this.props.numberUser+"/User/UserInfo");
-    refUserID.on("value", (snapshot) => {
-      let User = snapshot.val();
-      User = User.Username
-      this.setState({Worker: User})
-    });
-
-  }
-
-  handleChangeText(e) {
-    this.setState({ newText: e.target.value });
-  }
-
-  pushNewText = (e) => {
-    e.preventDefault()
-    var arrayText = this.state.arrayText
-    if(this.state.newText.length !== 0){
-      var addText =this.state.Worker+": "+this.state.newText
-      arrayText.push(addText)
-      this.setState({ newText: "" }); 
-      //save in firebase the new message
-      refChatRoom.set(this.state.arrayText)
-    }
-  }
-
-  render() {
-    var arrayText = this.state.arrayText.map((val, i) => {
-      return <div 
-      key={i}
-      className="EachMessage"
-      style={{backgroundColor: (i%2 === 1)?'#ddd':'#efefef'}}
-      >
-        {val}
-      </div>
-    });
-
-    return (
-      <div className="DivChat">
-        <p style={{color:"black", backgroundColor:"#18B68B", margin:"0", padding:"4px 0", fontWeight:"bolder"}}>CHAT</p>
-          <div className="TextContianer">
-            {arrayText}
-          </div>
-          <form onSubmit={this.pushNewText}>
-            <input
-              onChange={this.handleChangeText}  
-              type="text"
-              value={this.state.newText}
-              placeholder="Type your message" 
-              className="ChatInputST"/>
-            <button>send</button>
-          </form>
-      </div>
-    );
-  }
-}
-
+import { dbUser, refAllUsers } from './Tools/DataBase.js'
 
 class PostAndCategory extends Component {
   constructor(props) {
@@ -198,7 +41,6 @@ class PostAndCategory extends Component {
   render() {
     return (
       <div>
-        {/* SECCION DE LA CATEGORIA Y LOS POST*/}
         <div className="DivPostCategory">
         {/* SECCION DEL NUMERO DE POSTS*/}
         <ul className="listNumberPost" style={{width: this.state.widthPost }}>
@@ -232,7 +74,7 @@ class PostAndCategory extends Component {
               <li className="tittleListPC">Category</li>
               {this.state.post.map((val, i) => { 
                     return <li key={i}>
-                        <SelectCategory
+                        <SelectForCategory
                         id={i}
                         listCategory={this.state.category}
                         categoryValue={this.state.value[i]}
@@ -339,33 +181,4 @@ class PostAndCategory extends Component {
   }
 }
 
-
-class SelectCategory extends Component {
-  render() {
-    return (
-      <div>
-        <select id={this.props.id} value={this.props.categoryValue} onChange={this.props.handleChange}>
-          {this.props.listCategory.map((val, i) => {
-            return <option key={i} value={i}>
-              {val}
-            </option>
-          })}
-        </select>
-      </div>
-    );
-  }
-}
-
-
-function  WorkerPage (props) {
-  return (
-      <div className="divAPC">
-        <EmailBar numberUser={props.user}/>
-        <AsideBar/>
-        <ChatBar numberUser={props.user}/>
-        <PostAndCategory numberUser={props.user}/>
-      </div>
-  );
-}
-
-export default WorkerPage;
+export default PostAndCategory;
