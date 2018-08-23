@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Interface-worker.css';
-import { Collapse, Button} from 'reactstrap';
 import ModalExample  from './modal.js'
+import { Collapse, Button} from 'reactstrap';
+import Icon from 'react-icons-kit';
+import {arrowUp} from 'react-icons-kit/icomoon/arrowUp'
 import { Link } from 'react-router-dom';
-
 import { refGeneralCategory, dbUser, refAllUsers, refChatRoom} from './DataBase.js'
-
 
 class EmailBar extends Component {
   constructor(props) {
@@ -89,6 +89,7 @@ class AsideBar extends Component {
     );
   }
 }
+
 
 class ChatBar extends Component {
   constructor(props) {
@@ -210,9 +211,9 @@ class PostAndCategory extends Component {
           <ul className="listPost" style={{width: this.state.widthPost }}>
             <li className="tittleListPC">Post</li>
                     {this.state.post.map((val, i) => {
-                      if(val.post.length > 40){
+                      if(val.post.length > 38){
                         return <li key={i}>
-                          {val.post.substring(0,40)}... 
+                          {val.post.substring(0,38)}... 
                           <ModalExample 
                           post={val.post} 
                           ind={i+1} 
@@ -280,12 +281,46 @@ class PostAndCategory extends Component {
                       <div className="StyleStatistics">
                         {
                           Object.keys(percentage).map((key, index) => {
-                            return <div key={index} 
-                                        className="DivStatistics"
-                                        style={{width:(100/TotalSelectors)+"%"}}>
-                                <div style={{width:"70%"}}>{this.state.category[key]}</div>
-                                <div style={{backgroundColor:"green", width:"30%"}}>{" +"+percentage[key]}</div>
-                             </div>  
+                            if(TotalSelectors <= 3){
+                              return (
+                                <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
+                                  <div style={{width:"auto", float:"left", backgroundColor:"#D7DBDD", padding:"1px 0"}}>
+                                    <Icon size={12} icon={arrowUp} 
+                                    style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                                    {percentage[key]}
+                                  </div>
+                                    <div style={{width:"100%"}}>
+                                    {this.state.category[key]}
+                                  </div>
+                                </div>
+                              )
+                            }else if(TotalSelectors === 4){
+                              return (
+                                <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
+                                  <div style={{width:"auto", float:"left", backgroundColor:"#D7DBDD", padding:"1px 0"}}>
+                                    <Icon size={12} icon={arrowUp} 
+                                    style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                                    {percentage[key]}
+                                  </div>
+                                    <div style={{width:"100%", fontSize:"0.7rem"}}>
+                                    {this.state.category[key]}
+                                  </div>
+                                </div>
+                              )
+                            }else{
+                              return (
+                                <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
+                                  <div style={{width:"auto", float:"left", backgroundColor:"#D7DBDD", padding:"1px 0"}}>
+                                    <Icon size={12} icon={arrowUp} 
+                                    style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                                    {percentage[key]}
+                                  </div>
+                                    <div style={{width:"100%", fontSize:"0.55rem"}}>
+                                    {this.state.category[key]}
+                                  </div>
+                                </div>
+                              )
+                            }
                           })
                         }  
                       </div>
@@ -304,6 +339,7 @@ class PostAndCategory extends Component {
   }
 }
 
+
 class SelectCategory extends Component {
   render() {
     return (
@@ -319,6 +355,7 @@ class SelectCategory extends Component {
     );
   }
 }
+
 
 function  WorkerPage (props) {
   return (

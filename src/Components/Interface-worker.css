@@ -141,8 +141,8 @@
   float: left;
   display: inline-flex;
   height: auto;
-  margin: 26px 0 0 15px;
-  width: 920px;
+  margin: 10px 0 0 8px;
+  width: 930px;
 }
 .tittleListPC {
   font-size: 1.05rem;
@@ -153,7 +153,7 @@
   text-align: left;
   display: block;
   padding: 8px 5px 8px 10px;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0,0,0,.225);
   background-color: white;
   width: 100%;
 }
@@ -167,7 +167,8 @@
 
 /* POST SECTION */
 .listPost {
-  width: 600px;
+  width: 415px;
+  max-width: 415px;
   padding: 0;
   margin-bottom: 0;
 }
@@ -182,7 +183,7 @@
   margin: 0 0 0 4px;
   background-color: white; 
   color: black; 
-  border: 1.2px solid rgba(0,0,0,.125);
+  border: 1.2px solid rgba(0,0,0,.225);
   border-radius: 2px;
 }
 .buttonShow:hover {
@@ -192,6 +193,8 @@
 
 /* CATEGORY SECTION */
 .listCategory {
+  width: 175px;
+  max-width: 175px;
   padding: 0;
   margin-bottom: 0;
 }
@@ -204,7 +207,8 @@
 
 /* STATISTICS SECTION */
 .listStatistics {
-  width: 420px;
+  width: 305px;
+  max-width: 305px;
   padding: 0;
   margin-bottom: 0;
   text-align: center;
@@ -217,7 +221,7 @@
 .noUserSelected{
   height: 100%;
   width: 100%;
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0,0,0,.225);
   padding: 8px 0;
   text-align: center;
 }
@@ -230,16 +234,16 @@
   width: 100%;
 }
 .DivStatistics {
-  border: 1px solid rgba(0,0,0,.125);
+  border: 1px solid rgba(0,0,0,.225);
+  font-size: 0.85rem;
   margin: 0;
-  padding: 1px 0;
+  padding: 0;
   height: 42px;
   display: inline-flex;
 }
 .DivStatistics div {
   text-align: center;
-  background-color: rgb(0, 172, 230);
-  font-size: 0.9rem;
+  background-color: #F2F3F4;
   margin: 0;
-  padding: auto 1px;
+  padding: 8px 0;
 }
