@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {refAllUsers} from './Tools/DataBase.js'
 
-class EmailBar extends Component {
+class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,12 +39,12 @@ class EmailBar extends Component {
     return (
       <header style={BarHeaderStyle} >
         <div >{this.state.listUsers[this.props.numberUser]}</div>
-        <Link to="/">
-        <div style={ButtonLogOut} >Log Out</div>  
-        </Link>    
+          <Link to="/">
+            <div style={ButtonLogOut} >Log Out</div>  
+          </Link>  
       </header> 
     );
   }
 };
 
-export default EmailBar;
+export default NavBar;
