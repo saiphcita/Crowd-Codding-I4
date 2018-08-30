@@ -38,7 +38,7 @@ class ChatBar extends Component {
       arrayText.push(addText)
       this.setState({ newText: "" }); 
       //save in firebase the new message
-      refChatRoom.set(this.state.arrayText)
+      refChatRoom.set(arrayText)
     }
   }
 
@@ -55,7 +55,7 @@ class ChatBar extends Component {
 
     return (
       <div className="DivChat">
-        <p style={{color:"black", backgroundColor:"#18B68B", margin:"0", padding:"4px 0", fontWeight:"bolder"}}>CHAT</p>
+        <div style={{color:"black", backgroundColor:"#18B68B",height:"4%", margin:"0", paddingTop:"2px", fontWeight:"bolder"}}>CHAT</div>
           <div className="TextContianer">
             {arrayText}
           </div>

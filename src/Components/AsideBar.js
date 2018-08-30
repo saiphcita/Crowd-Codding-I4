@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
 import './CSS/AsideBar.css';
 import { Collapse, Button} from 'reactstrap';
-import { refGeneralCategory } from './Tools/DataBase.js'
+import ListCategory  from '../Components/Tools/ListCategory.js'
 
 class AsideBar extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = { 
-      collapse: false,
-      category: [],
+      collapse: false
     };
-  }
-
-  componentDidMount() {
-    refGeneralCategory.on("value", (snapshot) => {
-      let category = snapshot.val();
-      this.setState({category : category})
-    });
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
@@ -26,33 +18,20 @@ class AsideBar extends Component {
 
   render() {
     return (
-      <div className="aside">
+      <div className="divAside">
         <Collapse isOpen={this.state.collapse} className="collapseEstilo">
-            <Button color="primary" onClick={this.toggle} className="buttonBack">Go Back</Button>
-            <div className="DivDefinition">
-              <ul className="listDefiniton">
-                <li className="tittleList">Category</li>
-                {this.state.category.map(i => {
-                  return <li key={i.categoryName}>
-                    {i.categoryName}
-                  </li>
-                })}
-              </ul>
-              <ul className="listDefiniton">
-                <li className="tittleList">Definition</li>
-                {this.state.category.map(i => {
-                  return <li key={i.categoryName}>
-                    {i.categoryDefinition}
-                  </li>
-                })}
-              </ul>
+          <Button color="primary" onClick={this.toggle} style={{margin:"8px 0 10px 10px"}}>Regresar</Button>
+          <div className="divList">
+            <div style={{display:"inline-block"}}>
+                <ListCategory/>
             </div>
+          </div>
         </Collapse>
-      <div className="ShowTx">
-      <div>Show the definition of the categories.</div>
-      <Button color="primary" onClick={this.toggle} style={{marginTop: "12px"}}>Show</Button>
+        <div className="ShowDiv">
+          <div style={{margin:"12px 0"}}>Mostrar las Definiciones de las Categorías.</div>
+          <button onClick={this.toggle}>Mostrar</button>
+        </div>
       </div>
-    </div>
     );
   }
 }

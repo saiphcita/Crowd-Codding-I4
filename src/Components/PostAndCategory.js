@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './CSS/PostAndCategory.css';
-import ModalExample  from './Tools/modal.js'
-import SelectForCategory  from './Tools/SelectForCategory.js'
+import SelectForCategory  from '../Components/Tools/SelectForCategory.js'
 import Icon from 'react-icons-kit';
 import {arrowUp} from 'react-icons-kit/icomoon/arrowUp'
 import { dbUser, refAllUsers } from './Tools/DataBase.js'
@@ -13,165 +12,133 @@ class PostAndCategory extends Component {
       post: [],
       value: [],
       category: [],
-      listUsers: [],
+      heightPC: "100%"
     };
   }
 
   componentDidMount() {
-    var refUserPost = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Post");
-    var refUserCategory = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Category");
+    const refUserPost = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Post");    
     refUserPost.on("value", (snapshot) => {
       let posts = snapshot.val();
       this.setState({post : posts})
       this.setState({value: posts.map(val => {return val.category})})
+      // var arrayxx = posts
+      // for (let i = 0; i < posts.length; i++) { 
+      //   arrayxx[i].category = 0;
+      // };
+      // refUserPost.set(arrayxx);
     });
+
+    const refUserCategory = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Category");
     refUserCategory.on("value", (snapshot) => {
       let category = snapshot.val();
       this.setState({category : category})
     });
+
     refAllUsers.on("value", (snapshot) => {
       let AllUsers = snapshot.val();
-      this.setState({listUsers: AllUsers})
-
       let PostOfUser = AllUsers.map( val => val.User.PostAndCategory.Post)
       this.setState({PostOfUser: PostOfUser})
     });
-  }
+  };
 
   render() {
     return (
-      <div className="DivPostCategory">
-        {/* SECCION DEL NUMERO DE POSTS*/}
-        <ul className="listNumberPost" style={{width: this.state.widthPost }}>
-          <li className="tittleListPC" style={{padding:"8px 5px 8px 3px"}}>No.</li>
-            {this.state.post.map((val, i) => {
-              return <li key={i}>{i+1}</li>
-            })}
-        </ul>
-        {/* SECCION DE LOS POSTS*/}
-        <ul className="listPost" style={{width: this.state.widthPost }}>
-          <li className="tittleListPC">Post</li>
-            {this.state.post.map((val, i) => {
-            if(val.post.length > 38){
-              return(
-                <li key={i}>
-                  {val.post.substring(0,38)}... 
-                  <ModalExample post={val.post} ind={i+1} styleB="buttonShow"/>
-                </li>)
-            }else{
-              return(
-              <li key={i}>
-                {val.post}
-              </li>)
-            }
-          })}
-        </ul>
-        {/* SECCION DE LAS CATEGORIAS*/}
-        <ul className="listCategory">
-          <li className="tittleListPC">Category</li>
-          {this.state.post.map((val, i) => { 
-            return(
-              <li key={i}>
-                <SelectForCategory id={i} listCategory={this.state.category}categoryValue={this.state.value[i]}
-                  handleChange={(event) =>{
-                    let newValue = this.state.value.slice();
-                    newValue[i] = event.target.value;
-                    //save in firebase
-                    var refUserPost = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Post");
-                    let newPost = this.state.post;
-                    for (let i = 0; i < newPost.length; i++) {
-                      newPost[i].category = newValue[i]
-                    }
-                    this.setState({post: newPost});
-                    refUserPost.set(newPost)
-                  }}
-                />
-              </li>
-            )
-          })}
-        </ul>
-        {/* SECCION DE LAS ESTADISTICAS */}
-        <ul className="listStatistics">
-          <li className="tittleListPC">Statistics of each Post</li>
-          {this.state.post.map((val, indexPost) => {
-            let ArrayValores = this.state.PostOfUser.map(val => parseInt(val[indexPost].category, 10));
+      <div style={{height:"92%", textAlign:"center"}}>
+        <div className="DivPostCategory" style={{height:this.state.heightPC, maxHeight:this.state.heightPC}}>
+          <div className="titleList">
+            <li style={{width:"3.5%", maxWidth:"3.5%", padding:"0"}}>No.</li>
+            <li style={{width:"41.5%", maxWidth:"41.5%"}}>Comentario</li>
+            <li style={{width:"15%", maxWidth:"15%"}}>Categoría</li>
+            <li style={{width:"40%", maxWidth:"40%"}}>Estadística</li>
+          </div>
+          {this.state.post.map((val, ind) =>{
+            //esto es para la estadistica.
+            var estadistica = ""
+            let ArrayValores = this.state.PostOfUser.map(val => parseInt(val[ind].category, 10));
             var Postvalores = [];
             for (let i = 0; i < ArrayValores.length; i++) {
-              if(ArrayValores[i] > 0){
-                Postvalores.push(ArrayValores[i])
-              }
-            }
+              if(ArrayValores[i] > 0){ Postvalores.push(ArrayValores[i]) };
+            };
             let TotalValores = Postvalores.length
             var percentage = {};
-            for (let i = 0; i < TotalValores; i++) {
-              percentage[Postvalores[i]] = percentage[Postvalores[i]] ? Number(percentage[Postvalores[i]]) + 1 : 1;
-            }
+            for (let i = 0; i < TotalValores; i++) { percentage[Postvalores[i]] = percentage[Postvalores[i]] ? Number(percentage[Postvalores[i]]) + 1 : 1 };  
             var TotalSelectors = Object.keys(percentage).length
-            // THIS IS THE RESULT
             if(Number(val.category) !== 0){
-              if (Postvalores.length === 0) {
-                return (
-                  <li className="LIstatistics" key={indexPost}>
-                    <div className="noUserSelected">No one has selected in this Post</div>
-                  </li>)
+              if (Postvalores.length === 0) { estadistica = "No one has selected in this Post"
               }else {
-                return(
-                  <li className="LIstatistics" key={indexPost}>
-                    <div className="StyleStatistics">
-                      {
-                        Object.keys(percentage).map((key, index) => {
-                          if(TotalSelectors <= 3){
-                            return (
-                              <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
-                                <div style={{width:"auto", float:"left", backgroundColor:"#82E0AA", padding:"1px 0"}}>
-                                  <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                                  {percentage[key]}
-                                </div>
-                                <div style={{width:"100%"}}>
-                                  {this.state.category[key]}
-                                </div>
-                              </div>
-                            )
-                          }else if(TotalSelectors === 4){
-                            return (
-                              <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
-                                <div style={{width:"auto", float:"left", backgroundColor:"#82E0AA", padding:"1px 0"}}>
-                                  <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                                  {percentage[key]}
-                                </div>
-                                <div style={{width:"100%", fontSize:"0.7rem"}}>
-                                  {this.state.category[key]}
-                                </div>
-                              </div>
-                            )
-                          }else{
-                          return (
-                            <div key={index} className="DivStatistics" style={{width:(100/TotalSelectors)+"%"}}>
-                              <div style={{width:"auto", float:"left", backgroundColor:"#82E0AA", padding:"1px 0"}}>
-                                <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                                {percentage[key]}
-                              </div>
-                              <div style={{width:"100%", fontSize:"0.55rem"}}>
-                                {this.state.category[key]}
-                              </div>
+                estadistica = <div className="DivEstadistica">
+                  {
+                    Object.keys(percentage).map((key, index) => {
+                      if(TotalSelectors <= 3){
+                        return (
+                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
+                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
+                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                              {percentage[key]}
                             </div>
-                          )
-                          }
-                        })
-                      }  
-                    </div>
-                  </li>
-                ) 
-              }
-            }else{
-              return (
-                <li className="LIstatistics" key={indexPost}>
-                  <div className="noUserSelected">You must select a Category</div>
+                            <div style={{width:"100%"}}>
+                              {this.state.category[key]}
+                            </div>
+                          </div>
+                        )
+                      }else if(TotalSelectors === 4){
+                        return (
+                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
+                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
+                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                              {percentage[key]}
+                            </div>
+                            <div style={{width:"100%", fontSize:"0.7rem"}}>
+                              {this.state.category[key]}
+                            </div>
+                          </div>
+                        )
+                      }else{
+                        return (
+                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
+                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
+                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
+                              {percentage[key]}
+                            </div>
+                            <div style={{width:"100%", fontSize:"0.55rem"}}>
+                              {this.state.category[key]}
+                            </div>
+                          </div>
+                        )
+                      }
+                    })
+                  }  
+                </div>
+              };
+            }else{estadistica = "You must select a Category" };
+            //Aqui termina lo de estadistica
+
+            return (
+              <div key={ind} className="NCClist">
+                <li key={ind} style={{width:"3.5%", maxWidth:"3.5%", textAlign:"center", padding:"0"}}>{ind+1}</li>
+                <li key={val.post} style={{width:"41.5%", maxWidth:"41.5%"}}>{val.post}</li>
+                <li style={{width:"15%", maxWidth:"15%", padding:"0"}}>
+                  {<SelectForCategory id={ind} listCategory={this.state.category} categoryValue={this.state.value[ind]}
+                    handleChange={(event) =>{
+                      const refUserPost = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Post");
+                      let newValue = this.state.value.slice();
+                      newValue[ind] = event.target.value;
+                      //save in firebase
+                      let newPost = this.state.post;
+                      for (let i = 0; i < newPost.length; i++) {
+                        newPost[i].category = newValue[i]
+                      };
+                      this.setState({post: newPost});
+                      refUserPost.set(newPost);
+                    }}
+                  />}
                 </li>
-              )
-            }
+                <li style={{width:"40%", maxWidth:"40%", padding:"0", textAlign:"center"}}>{estadistica}</li>
+              </div>
+            )
           })}
-        </ul>
+        </div>
       </div>
     );
   }
