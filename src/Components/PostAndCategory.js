@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './CSS/PostAndCategory.css';
 import SelectForCategory  from '../Components/Tools/SelectForCategory.js'
-import Icon from 'react-icons-kit';
-import {arrowUp} from 'react-icons-kit/icomoon/arrowUp'
+import Dropdown  from '../Components/Tools/Dropdown.js'
 import { dbUser, refAllUsers } from './Tools/DataBase.js'
 
 class PostAndCategory extends Component {
@@ -48,9 +47,9 @@ class PostAndCategory extends Component {
         <div className="DivPostCategory" style={{height:this.state.heightPC, maxHeight:this.state.heightPC}}>
           <div className="titleList">
             <li style={{width:"3.5%", maxWidth:"3.5%", padding:"0"}}>No.</li>
-            <li style={{width:"41.5%", maxWidth:"41.5%"}}>Comentario</li>
-            <li style={{width:"15%", maxWidth:"15%"}}>Categoría</li>
-            <li style={{width:"40%", maxWidth:"40%"}}>Estadística</li>
+            <li style={{width:"58%", maxWidth:"58%"}}>Comentario</li>
+            <li style={{width:"18%", maxWidth:"18%"}}>Categoría</li>
+            <li style={{width:"20.5%", maxWidth:"20.5%"}}>Estadística</li>
           </div>
           {this.state.post.map((val, ind) =>{
             //esto es para la estadistica.
@@ -63,62 +62,16 @@ class PostAndCategory extends Component {
             let TotalValores = Postvalores.length
             var percentage = {};
             for (let i = 0; i < TotalValores; i++) { percentage[Postvalores[i]] = percentage[Postvalores[i]] ? Number(percentage[Postvalores[i]]) + 1 : 1 };  
-            var TotalSelectors = Object.keys(percentage).length
             if(Number(val.category) !== 0){
-              if (Postvalores.length === 0) { estadistica = "No one has selected in this Post"
-              }else {
-                estadistica = <div className="DivEstadistica">
-                  {
-                    Object.keys(percentage).map((key, index) => {
-                      if(TotalSelectors <= 3){
-                        return (
-                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
-                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
-                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                              {percentage[key]}
-                            </div>
-                            <div style={{width:"100%"}}>
-                              {this.state.category[key]}
-                            </div>
-                          </div>
-                        )
-                      }else if(TotalSelectors === 4){
-                        return (
-                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
-                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
-                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                              {percentage[key]}
-                            </div>
-                            <div style={{width:"100%", fontSize:"0.7rem"}}>
-                              {this.state.category[key]}
-                            </div>
-                          </div>
-                        )
-                      }else{
-                        return (
-                          <div key={index} className="DivSonE" style={{width:(100/TotalSelectors)+"%"}}>
-                            <div style={{width:"22px", float:"left", backgroundColor:"#82E0AA", padding:"0"}}>
-                              <Icon size={12} icon={arrowUp} style={{backgroundColor:"inherit", color:"#3D4040", padding:"0", margin:"0"}}/>
-                              {percentage[key]}
-                            </div>
-                            <div style={{width:"100%", fontSize:"0.55rem"}}>
-                              {this.state.category[key]}
-                            </div>
-                          </div>
-                        )
-                      }
-                    })
-                  }  
-                </div>
-              };
-            }else{estadistica = "You must select a Category" };
+              estadistica = <Dropdown numero={ind+1} objectEstadistica={percentage} numberUser={this.props.numberUser}/>  
+            }else{ estadistica = "You must select a Category" };
             //Aqui termina lo de estadistica
 
             return (
               <div key={ind} className="NCClist">
                 <li key={ind} style={{width:"3.5%", maxWidth:"3.5%", textAlign:"center", padding:"0"}}>{ind+1}</li>
-                <li key={val.post} style={{width:"41.5%", maxWidth:"41.5%"}}>{val.post}</li>
-                <li style={{width:"15%", maxWidth:"15%", padding:"0"}}>
+                <li key={val.post} style={{width:"58%", maxWidth:"58%"}}>{val.post}</li>
+                <li style={{width:"18%", maxWidth:"18%", padding:"0"}}>
                   {<SelectForCategory id={ind} listCategory={this.state.category} categoryValue={this.state.value[ind]}
                     handleChange={(event) =>{
                       const refUserPost = dbUser.ref("Users/"+this.props.numberUser+"/User/PostAndCategory/Post");
@@ -134,7 +87,7 @@ class PostAndCategory extends Component {
                     }}
                   />}
                 </li>
-                <li style={{width:"40%", maxWidth:"40%", padding:"0", textAlign:"center"}}>{estadistica}</li>
+                <li style={{width:"20.5%", maxWidth:"20.5%", padding:"0", textAlign:"center"}}>{estadistica}</li>
               </div>
             )
           })}
