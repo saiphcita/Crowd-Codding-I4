@@ -11,29 +11,32 @@ class StartInterface  extends Component {
         this.state = {
             color1: "#3C3B47",
             color2: "#3C3B47",
+            pageTimeLoad: false,
             StatePage: <div className="divStatePage"><h2>Create a Worker ID to enter the work page and if you already have it, you can login.</h2></div>,
-            listUsers: [],
-            pageTimeLoad: false
+            listUsers: []
         };
       }
 
     componentDidMount(){
         refAllUsers.on("value", (snapshot) => {
             let AllUsers = snapshot.val();
-            let listOfUsers = AllUsers.map(val => {return val.User.UserInfo.Username})
+            let listOfUsers = AllUsers.map(val => {return val.UserInfo.Username})
             this.setState({allUsers : AllUsers})
             this.setState({listUsers: listOfUsers})
         });
         refGeneralPosts.on("value", (snapshot) => {
             let posts = snapshot.val();
-            posts = posts.map(i => { return {"category": 0, "post": i }})
+            posts = posts.map(i => { return {"category": "Select Category", "post": i }})
             this.setState({posts : posts})
         });
         refGeneralCategory.on("value", (snapshot) => {
             let categorys = snapshot.val();
             categorys = categorys.map(i => i.categoryName)
-            categorys.unshift("Select Category")
-            this.setState({categorys : categorys})
+            var objectCategorys = {}
+            for(let i=0; i < categorys.length; i++){
+                objectCategorys[categorys[i]] = 0
+            }
+            this.setState({categorys : objectCategorys})
         });
         setTimeout(()=> {
             this.setState({pageTimeLoad: true})
@@ -81,12 +84,12 @@ class StartInterface  extends Component {
                             </div>
                         </div>
         }else{
-            pageLoad = <div style={{color: "white"}}>loading...</div>
+            pageLoad = <div style={{color:"white"}}>loading...</div>
         }
 
         return (
-            <div className="DivBase ">
-                <h3>Welcome to WokerPage</h3>
+            <div style={{textAlign:"center", height:"100%", backgroundColor:"#F2F4F4"}}>
+                <h3 style={{paddingTop:"18px"}}>Welcome to WokerPage</h3>
                 <div className="DivForm">
                     {pageLoad}
                     {this.state.StatePage}

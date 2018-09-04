@@ -14,7 +14,7 @@ class NavBar extends Component {
   componentDidMount(){
     refAllUsers.on("value", (snapshot) => {
         let AllUsers = snapshot.val();
-        let listOfUsers = AllUsers.map(val => {return val.User.UserInfo.Username})
+        let listOfUsers = AllUsers.map(val => {return val.UserInfo.Username})
         this.setState({workerName: listOfUsers[this.props.numberUser].charAt(0).toUpperCase() + listOfUsers[this.props.numberUser].slice(1)})
     });
   }

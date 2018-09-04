@@ -33,22 +33,21 @@ class SignUp extends Component{
                 }else{
                     var usuarios = this.state.allUsers
                     var NewUser = {
-                        "User": {
-                          "PostAndCategory": {
-                            "Category": [],
-                            "Post": []
-                          },
-                          "UserInfo": {
-                            "Password": this.state.password,
-                            "Username": this.state.user.toLowerCase()
-                          }
-                        }
+                        "PostAndCategory": {
+                          "Category": "",
+                          "Post": []
+                        },
+                        "UserInfo": {
+                          "Password": this.state.password,
+                          "Username": this.state.user.toLowerCase()
+                        },
+                        "UserState": "working"
                       };
-                      NewUser.User.PostAndCategory.Category = this.props.categorys
-                      NewUser.User.PostAndCategory.Post = this.props.posts
+                      NewUser.PostAndCategory.Category = this.props.categorys
+                      NewUser.PostAndCategory.Post = this.props.posts
                       usuarios.push(NewUser)
                       this.setState({allUsers: usuarios})
-                      this.setState({listUsers: this.state.allUsers.map(val => {return val.User.UserInfo.Username})})
+                      this.setState({listUsers: this.state.allUsers.map(val => {return val.UserInfo.Username})})
                       //save the new user
                       refAllUsers.set(this.state.allUsers)
                 }

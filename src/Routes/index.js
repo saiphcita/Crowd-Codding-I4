@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import WorkerPage from '../Page/Interface-worker';
 import StartInterface from '../Page/Start-interface.js';
 
 import { refAllUsers} from '../Components/Tools/DataBase.js'
-
 
 class RoutesID  extends Component {
   constructor(props) {
@@ -18,11 +13,10 @@ class RoutesID  extends Component {
         listUsers: []
       };
     }
-
     componentDidMount(){
       refAllUsers.on("value", (snapshot) => {
           let AllUsers = snapshot.val();
-          let listOfUsers = AllUsers.map(val => {return val.User.UserInfo.Username})
+          let listOfUsers = AllUsers.map(val => {return val.UserInfo.Username})
           this.setState({listUsers: listOfUsers})
       });
     }

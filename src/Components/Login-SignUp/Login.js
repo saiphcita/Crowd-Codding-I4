@@ -27,7 +27,7 @@ class LogIn extends Component{
                 }else{
                     if(this.state.password.length === 0){
                         this.setState({divErr: <div style={{color: "red"}}>Enter your password*</div> })
-                    }else if(this.state.allUsers[this.state.numberForPassowrd].User.UserInfo.Password !== this.state.password){
+                    }else if(this.state.allUsers[this.state.numberForPassowrd].UserInfo.Password !== this.state.password){
                         this.setState({divErr: <div style={{color: "red"}}>Your password doesn't match*</div> })
                     }
                 };
@@ -50,7 +50,7 @@ class LogIn extends Component{
       handleChangePassword(e) {
         this.setState({ password: e.target.value });
         if(this.state.listUsers.includes(this.state.user)){
-            if(this.state.allUsers[this.state.numberForPassowrd].User.UserInfo.Password !== e.target.value){
+            if(this.state.allUsers[this.state.numberForPassowrd].UserInfo.Password !== e.target.value){
                 this.setState({divErr: <div style={{color: "red"}}>Your password is incorrect*</div> })
             }else{
                 this.setState({divErr: <div style={{color: "green"}}>Your Password is correct</div> })
@@ -66,7 +66,7 @@ class LogIn extends Component{
         var passwordId = this.state.password;
         if(this.state.listUsers.includes(workerId)){
             var number = this.state.listUsers.indexOf(workerId)
-            if (this.state.allUsers[number].User.UserInfo.Password === passwordId){
+            if (this.state.allUsers[number].UserInfo.Password === passwordId){
                 url = "/postAndcategory/"+workerId;
                 divStatus = <div style={{display: "inline-block", float: "right"}}><div style={{color: "green"}}>Welcome {workerId}</div></div>
             }else{

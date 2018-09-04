@@ -17,7 +17,7 @@ class ChatBar extends Component {
         let text = snapshot.val();
         this.setState({arrayText: text})
     });
-    var refUserID = dbUser.ref("Users/"+this.props.numberUser+"/User/UserInfo");
+    var refUserID = dbUser.ref("Users/"+this.props.numberUser+"/UserInfo");
     refUserID.on("value", (snapshot) => {
       let User = snapshot.val();
       User = User.Username

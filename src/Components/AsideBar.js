@@ -20,7 +20,7 @@ class AsideBar extends Component {
     return (
       <div className="divAside">
         <Collapse isOpen={this.state.collapse} className="collapseEstilo">
-          <Button color="primary" onClick={this.toggle} style={{margin:"8px 0 10px 10px"}}>Regresar</Button>
+          <Button color="primary" onClick={this.toggle} style={{margin:"8px 0 10px 10px"}}>Go Back</Button>
           <div className="divList">
             <div style={{display:"inline-block"}}>
                 <ListCategory/>
@@ -28,8 +28,8 @@ class AsideBar extends Component {
           </div>
         </Collapse>
         <div className="ShowDiv">
-          <div style={{margin:"12px 0"}}>Mostrar las Definiciones de las Categorías.</div>
-          <button onClick={this.toggle}>Mostrar</button>
+          <div style={{margin:"12px 0"}}>Show the Definitions of the Categories.</div>
+          <button onClick={this.toggle}>Show</button>
         </div>
       </div>
     );

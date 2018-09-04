@@ -69,28 +69,3 @@
     color: #F5A803;
     border: 1px solid #F5A803;
 }
-/* Estadistica */
-.DivEstadistica  {
-    display: inline-flex;
-    color: black;
-    height: 100%;
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
-}
-.DivSonE {
-    display: table;
-    text-align: center;
-    border: 1px solid rgba(0,0,0,.125);
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-.DivSonE div {
-    display: table-cell;
-    vertical-align: middle;
-    background-color: #85C1E9;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
