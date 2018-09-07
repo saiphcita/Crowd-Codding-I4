@@ -67,16 +67,16 @@ export default class SelectForCategory extends React.Component {
         backgroundColor: "#E4FFF7",
         color:"black",
         height: "auto",
-        width: "320px",
+        width: "340px",
         border: "2px solid black",
         borderRadius: "4px"
     };
     var numeroEstadistico = {
-        float:"left", 
+        float:"right", 
         color:"black", 
         backgroundColor:"#95FC5A", 
         borderRadius:"3px", 
-        width:"40px", 
+        width:"45px", 
         textAlign:"center"
     };
 
@@ -91,13 +91,13 @@ export default class SelectForCategory extends React.Component {
             <DropdownItem disabled>{"Category: "+this.state.actualCategory}</DropdownItem>
             <DropdownItem divider />
             <DropdownItem key={0} onClick={()=>{this.setState({actualCategory:"Select Category"}); this.props.saveCategory.set("Select Category"); this.props.elState.set("working");}}>
-              <div style={{float:"left", marginRight:"16px"}}>Select Category</div> 
+              <div style={{float:"left"}}>Select Category</div> 
             </DropdownItem>
             {
               this.state.arrayCategories.map((val, ind) => {
                 return(
                   <DropdownItem key={ind} onClick={()=>{this.setState({actualCategory:val}); this.props.saveCategory.set(val); this.props.elState.set("working");}}>
-                      <div style={{float:"left", marginRight:"16px"}}>{val}</div> 
+                      <div style={{float:"left"}}>{val}</div> 
                       <div style={numeroEstadistico}>{this.state.categoriasPopularty[val]} <Icon size={12} icon={arrowUp}/></div>
                   </DropdownItem>
                 )

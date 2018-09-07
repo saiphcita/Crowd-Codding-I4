@@ -37,7 +37,7 @@ refAllUsers.on("value", (snapshot) => {
         var infoArray = {
             "1-Worker": users[i].UserInfo.Username,
             "2-Post": users[i].PostAndCategory.Post,
-            "3-Selected": seleccted.length+ " of "+users[i].PostAndCategory.Post.length,
+            "3-Selected": "Has "+seleccted.length+" Posts categorized of "+users[i].PostAndCategory.Post.length +" Posts.",
             "4-State": users[i].UserState
         };
         infoCosole.push(infoArray);
