@@ -1,6 +1,6 @@
 import React from 'react';
-import './CSS/Instrucciones.css';
-import ListCategory  from '../Components/Tools/ListCategory.js'
+import '../CSS/Instrucciones.css';
+import ListCategory  from './ListCategory.js'
 
 class Instrucciones extends React.Component {
   constructor(props) {

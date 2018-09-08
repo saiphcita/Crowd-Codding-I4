@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Instrucciones  from '../Components/Instrucciones.js'
-import NavBar  from '../Components/NavBar.js'
-import AsideBar  from '../Components/AsideBar.js'
-import ChatBar  from '../Components/ChatBar.js'
-import PostAndCategory  from '../Components/PostAndCategory.js'
-import PagePay  from '../Components/PagePay.js'
+import Instrucciones  from './Tools/Instrucciones.js'
+import NavBar  from './Tools/NavBar.js'
+import AsideBar  from './Tools/AsideBar.js'
+import ChatBar  from './Tools/ChatBar.js'
+import PostAndCategory  from './Tools/PostAndCategory.js'
+import PagePay  from './Tools/PagePay.js'
 
 class WorkerPage extends Component {
   constructor(props) {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './SignUp.css';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
-import { Link } from 'react-router-dom';
 import { refAllUsers } from '../Tools/DataBase.js'
 
 class SignUp extends Component{
@@ -13,7 +12,8 @@ class SignUp extends Component{
             confirmPassword: "",
             replyErr: null,
             allUsers: this.props.allUsers,
-            listUsers: this.props.listUsers
+            listUsers: this.props.listUsers,
+            wait: <div/>
           };
 
           this.handleChangeUser = this.handleChangeUser.bind(this);
@@ -21,7 +21,7 @@ class SignUp extends Component{
           this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this);
       };
     
-    handleClick = (event) => {
+    handleClick = () => {
         if(this.state.user.length === 0 || this.state.password.length === 0 || this.state.confirmPassword.length === 0){
             this.setState({replyErr: "You must fill all the fields*"})
         }else{
@@ -34,7 +34,7 @@ class SignUp extends Component{
                     var usuarios = this.state.allUsers
                     var NewUser = {
                         "PostAndCategory": {
-                          "Category": "",
+                          "Category": [],
                           "Post": []
                         },
                         "UserInfo": {
@@ -45,11 +45,13 @@ class SignUp extends Component{
                       };
                       NewUser.PostAndCategory.Category = this.props.categorys
                       NewUser.PostAndCategory.Post = this.props.posts
-                      usuarios.push(NewUser)
-                      this.setState({allUsers: usuarios})
-                      this.setState({listUsers: this.state.allUsers.map(val => {return val.UserInfo.Username})})
+                      usuarios.push(NewUser);
                       //save the new user
-                      refAllUsers.set(this.state.allUsers)
+                      refAllUsers.set(usuarios);
+                      this.setState({workerId: this.state.user.toLowerCase()})
+                      this.setState({workerPassword: this.state.password});
+                      this.setState({wait:<div style={{color: "green"}}>Wait a Second...</div>});
+                      setTimeout(()=> { window.location.reload(); }, 1500);
                 }
             }
         }
@@ -83,10 +85,14 @@ class SignUp extends Component{
         }
     };
 
+    componentWillUpdate(nextProps, nextState){
+        localStorage.setItem("WorkerId", nextState.workerId);
+        localStorage.setItem("WorkerPassword", nextState.workerPassword)
+    }
+
     render(){
 
         var divStatus = <div className="replyErr">{this.state.replyErr}</div>;
-        var url = "";
         var workerId = this.state.user;
         var passwordId = this.state.password;
         var confirmPasswordId = this.state.confirmPassword;
@@ -94,15 +100,10 @@ class SignUp extends Component{
             if(!this.state.listUsers.includes(workerId)){
                 if(passwordId.length !== 0 || confirmPasswordId.length !== 0){
                     if (confirmPasswordId === passwordId){
-                        url = "/postAndcategory/"+workerId;
                         divStatus = <div className="replyErr"><div style={{color: "green"}}>Your Worker Id and your Password are correct</div></div>
-                    }else{
-                        url = "";
                     }
                 }
-            }else{
-                url = "";
-            };
+            }
         };
 
         return (
@@ -142,10 +143,9 @@ class SignUp extends Component{
                     </FormGroup> 
 
                 </Form>
-                <Link to={url}>
                 <Button style={{float: "right"}} color="success" onClick={this.handleClick}>Submit</Button>
-                </Link>
                 {divStatus}
+                {this.state.wait}
             </div> 
         );
     };

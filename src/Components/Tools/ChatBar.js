@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './CSS/ChatBar.css';
-import { dbUser, refChatRoom } from './Tools/DataBase.js'
+import '../CSS/ChatBar.css';
+import { dbUser, refChatRoom } from './DataBase.js'
 
 class ChatBar extends Component {
   constructor(props) {

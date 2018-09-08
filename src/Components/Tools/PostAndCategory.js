@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './CSS/PostAndCategory.css';
-import SelectForCategory  from '../Components/Tools/SelectForCategory.js'
-import { dbUser, refAllUsers } from './Tools/DataBase.js'
+import '../CSS/PostAndCategory.css';
+import SelectForCategory  from './SelectForCategory.js'
+import { dbUser, refAllUsers } from './DataBase.js'
 
 class PostAndCategory extends Component {
   constructor(props) {

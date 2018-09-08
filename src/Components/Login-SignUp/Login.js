@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Login.css';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class LogIn extends Component{
     constructor(props) {
@@ -17,7 +16,7 @@ class LogIn extends Component{
         this.handleChangePassword = this.handleChangePassword.bind(this);
       };
     
-    handleClick = (event) => {
+    handleClick = () => {
         if(this.state.user.length === 0 && this.state.password.length === 0){
             this.setState({divErr: <div style={{color: "red"}}>Write your Worker ID and your password*</div> })
         }else{
@@ -29,7 +28,11 @@ class LogIn extends Component{
                         this.setState({divErr: <div style={{color: "red"}}>Enter your password*</div> })
                     }else if(this.state.allUsers[this.state.numberForPassowrd].UserInfo.Password !== this.state.password){
                         this.setState({divErr: <div style={{color: "red"}}>Your password doesn't match*</div> })
-                    }
+                    }else{
+                        this.setState({workerId: this.state.user.toLowerCase()});
+                        this.setState({workerPassword: this.state.password});
+                        window.location.reload();
+                    };
                 };
             }else{
                 this.setState({divErr: <div style={{color: "red"}}>Enter your Worker ID*</div> })
@@ -59,22 +62,21 @@ class LogIn extends Component{
         };
     };
 
+    componentWillUpdate(nextProps, nextState){
+        localStorage.setItem("WorkerId", nextState.workerId);
+        localStorage.setItem("WorkerPassword", nextState.workerPassword)
+    }
+
     render(){
         var divStatus = <div style={{display: "inline-block", float: "right"}}>{this.state.divErr}</div>;
-        var url = "";
         var workerId = this.state.user;
         var passwordId = this.state.password;
         if(this.state.listUsers.includes(workerId)){
             var number = this.state.listUsers.indexOf(workerId)
             if (this.state.allUsers[number].UserInfo.Password === passwordId){
-                url = "/postAndcategory/"+workerId;
                 divStatus = <div style={{display: "inline-block", float: "right"}}><div style={{color: "green"}}>Welcome {workerId}</div></div>
-            }else{
-                url = "";
             }
-        }else{
-            url = "";
-        };
+        }
         return (
             <div className="DivLogin">
                 <Form>
@@ -102,9 +104,7 @@ class LogIn extends Component{
                     </FormGroup>   
                          
                 </Form>
-                <Link to={url}>
                 <Button color="success" onClick={this.handleClick}>Start</Button>
-                </Link>
                 {divStatus}
             </div> 
         );

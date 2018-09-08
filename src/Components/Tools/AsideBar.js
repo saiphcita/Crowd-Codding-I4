@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './CSS/AsideBar.css';
+import '../CSS/AsideBar.css';
 import { Collapse, Button} from 'reactstrap';
-import ListCategory  from '../Components/Tools/ListCategory.js'
+import ListCategory  from './ListCategory.js'
 
 class AsideBar extends Component {
   constructor(props) {

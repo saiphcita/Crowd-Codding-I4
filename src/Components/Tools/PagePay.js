@@ -1,7 +1,7 @@
 import React from 'react';
-import { dbUser, refAllUsers } from './Tools/DataBase.js'
+import { dbUser, refAllUsers } from './DataBase.js'
 
-class ListCategory extends React.Component {
+class PagePay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,4 +44,4 @@ componentDidMount() {
   }
 }
 
-export default ListCategory;
+export default PagePay;
