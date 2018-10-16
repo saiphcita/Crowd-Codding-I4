@@ -13,14 +13,13 @@ class Instrucciones extends React.Component {
       <div style={{textAlign:"center"}}>
           <header style={{backgroundColor:"black", color:"white", padding:"10px"}}>
             <h3>
-              Instrucciones
+              Instructions
             </h3>
           </header>
           <div className="ListInstruccion">
-            <p>Estamos estudiando cómo se usaron las plataformas tecnológicas  después  del terremoto que sucedió en México el 19 de Septiembre de 2017.</p>
-            <p>Te daremos una hoja de cálculo donde está una lista de descripciones que nos dieron varias personas en una encuesta donde nos platican sobre su experiencia sobre el temblor y el uso de la tecnología.</p>
-            <p>Cada renglón representa un comentario de una persona.</p>      
-            <p>Objetivo: categoriza cada comentario con alguna de las siguientes categorías.</p>
+            <p>We are studying how people think about cryptocurrencies and Blockchain as a tool for the Governments and Society around the world.</p>
+            <p>We will give you a list of Posts and you will have to categorize what you think and feel towards that post.</p>
+            <p>Objective: Categorize each Post with one of the following categories.</p>
           </div>
           <div style={{display:"inline-block"}}>
               <ListCategory/>

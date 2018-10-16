@@ -1,0 +1,13 @@
+.divSurveyImprove{
+    margin: 12px 0px 0px 12px;
+}
+
+.divSurveyImprove li{
+    list-style-type: none;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.divFormRadio input{
+    margin: 0px 8px 0px 4px;
+}

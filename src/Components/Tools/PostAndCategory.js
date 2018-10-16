@@ -79,8 +79,8 @@ class PostAndCategory extends Component {
         <div className="DivPostCategory" style={{height:this.state.heightPC, maxHeight:this.state.heightPC}}>
           <div className="titleList">
             <li style={{width:"3.5%", maxWidth:"3.5%", padding:"0"}}>No.</li>
-            <li style={{width:"75%", maxWidth:"75%"}}>Post</li>
-            <li style={{width:"21.5%", maxWidth:"21.5%"}}>Category</li>
+            <li style={{width:"70%", maxWidth:"70%"}}>Post</li>
+            <li style={{width:"25.5%", maxWidth:"25.5%"}}>Category</li>
           </div>
           {this.state.post.map((val, ind) =>{
             //esto es Select Category y Estadistica
@@ -92,8 +92,8 @@ class PostAndCategory extends Component {
             return (
               <div key={ind} className="NCClist">
                 <li key={ind} style={{width:"3.5%", maxWidth:"3.5%", textAlign:"center", padding:"0"}}>{ind+1}</li>
-                <li key={val.post} style={{width:"75%", maxWidth:"75%"}}>{val.post}</li>
-                <li style={{width:"21.5%", maxWidth:"21.5%", padding:"0", margin:"0"}}>
+                <li key={val.post} style={{width:"70%", maxWidth:"70%"}}>{val.post}</li>
+                <li style={{width:"25.5%", maxWidth:"25.5%", padding:"0", margin:"0"}}>
                   <SelectForCategory 
                   saveCategory={refUserCategorySelected} 
                   categorias={todasLasCategorias} 
