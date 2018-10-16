@@ -38,7 +38,8 @@ refAllUsers.on("value", (snapshot) => {
             "1-Worker": users[i].UserInfo.Username,
             "2-Post": users[i].PostAndCategory.Post,
             "3-Selected": "Has "+seleccted.length+" categorized Posts of "+users[i].PostAndCategory.Post.length +" Posts.",
-            "4-State": users[i].UserState
+            "4-State": users[i].UserState,
+            "5-WorkCode": users[i].UserInfo.NumberPay
         };
         infoCosole.push(infoArray);
     };
