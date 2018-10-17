@@ -78,7 +78,7 @@ componentDidMount() {
         return numberRandom = Math.floor(Math.random() * (max - min) + min)
       }
     }
-    if(AllUsers[this.props.numberUser].UserInfo.NumberPay === undefined){
+    if(AllUsers[this.props.numberUser].UserInfo.NumberPay === false){
       if(AllUsers[this.props.numberUser].UserState === "finished"){
         var newUserInfo = AllUsers[this.props.numberUser]
         var numberPay = GetRandomNumber(10000000, 99999999)

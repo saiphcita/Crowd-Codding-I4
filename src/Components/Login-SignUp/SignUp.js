@@ -37,7 +37,10 @@ class SignUp extends Component{
                           "Category": [],
                           "Post": []
                         },
+                        "TimeWork": 0,
+                        "UserHelp": "",
                         "UserInfo": {
+                          "NumberPay": false,
                           "Password": this.state.password,
                           "Username": this.state.user.toLowerCase()
                         },
