@@ -7,6 +7,8 @@ import ChatBar  from './Tools/ChatBar.js'
 import PostAndCategory  from './Tools/PostAndCategory.js'
 import PagePay  from './Tools/PagePay.js'
 
+import { dbUser } from './Tools/DataBase.js'
+
 class WorkerPage extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +17,32 @@ class WorkerPage extends Component {
     };
   }
 
-  changeState() { this.setState({ statePage: 1 }) };
-  changeState2() { this.setState({ statePage: 2 }) };
+  componentDidMount(){
+    const refUserTimeWork = dbUser.ref("Users/"+this.props.user+"/TimeWork")
+    refUserTimeWork.on("value", (snapshot) => {
+      let timeDB = snapshot.val();
+      this.setState({time : timeDB})
+    });
+  }
+
+  changeState() {
+    var time = this.state.time
+    var intervalId = setInterval(() => {
+      time++
+      this.setState({time: time})
+    }, 1000);
+
+    this.setState({ statePage: 1, intervalId: intervalId}) 
+  };
+
+  changeState2() {
+    clearInterval(this.state.intervalId)
+    
+    const refUserTimeWork= dbUser.ref("Users/"+this.props.user+"/TimeWork")
+    refUserTimeWork.set(this.state.time)
+
+    this.setState({ statePage: 2 })
+  };
 
   render() {
     var Page = <div/>

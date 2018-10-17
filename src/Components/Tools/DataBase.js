@@ -34,12 +34,26 @@ refAllUsers.on("value", (snapshot) => {
                 seleccted.push(users[i].PostAndCategory.Post[j].category)
             };
         };
+
+        var fancyTimeFormat = (time) =>{  
+          var hrs = ~~(time / 3600);
+          var mins = ~~((time % 3600) / 60);
+          var secs = ~~time % 60;
+          var ret = "";
+
+          if (hrs > 0) {  ret += "" + hrs + ":" + (mins < 10 ? "0" : "");  };
+          ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+          ret += "" + secs;
+          return ret;
+        }
+
         var infoArray = {
             "1-Worker": users[i].UserInfo.Username,
             "2-Post": users[i].PostAndCategory.Post,
             "3-Selected": "Has "+seleccted.length+" categorized Posts of "+users[i].PostAndCategory.Post.length +" Posts.",
             "4-State": users[i].UserState,
-            "5-WorkCode": users[i].UserInfo.NumberPay
+            "5-WorkCode": users[i].UserInfo.NumberPay,
+            "6-TimeWork": fancyTimeFormat(users[i].TimeWork)
         };
         infoCosole.push(infoArray);
     };
