@@ -87,6 +87,7 @@ class PostAndCategory extends Component {
             var todasLasCategorias = this.state.category
             todasLasCategorias = Object.keys(todasLasCategorias).map((val)=>{return val})
             const refUserCategorySelected = dbUser.ref("Users/"+this.props.numberUser+"/PostAndCategory/Post/"+ind+"/category/")
+            const refUserCategoryTime = dbUser.ref("Users/"+this.props.numberUser+"/PostAndCategory/Post/"+ind+"/time/")
             const refUserSate= dbUser.ref("Users/"+this.props.numberUser+"/UserState")
             //Aqui termina lo de Select Category y Estadistica
             return (
@@ -94,7 +95,9 @@ class PostAndCategory extends Component {
                 <li key={ind} style={{width:"3.5%", maxWidth:"3.5%", textAlign:"center", padding:"0"}}>{ind+1}</li>
                 <li key={val.post} style={{width:"70%", maxWidth:"70%"}}>{val.post}</li>
                 <li style={{width:"25.5%", maxWidth:"25.5%", padding:"0", margin:"0"}}>
-                  <SelectForCategory 
+                  <SelectForCategory
+                  saveTime={refUserCategoryTime}
+                  timing={this.props.timing}
                   saveCategory={refUserCategorySelected} 
                   categorias={todasLasCategorias} 
                   numberP={ind} 

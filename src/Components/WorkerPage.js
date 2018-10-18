@@ -13,7 +13,8 @@ class WorkerPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      statePage: 0
+      statePage: 0,
+      timingCategories: 0
     };
   }
 
@@ -27,9 +28,11 @@ class WorkerPage extends Component {
 
   changeState() {
     var time = this.state.time
+    var timingCategories = this.state.timingCategories
     var intervalId = setInterval(() => {
       time++
-      this.setState({time: time})
+      timingCategories++
+      this.setState({time: time, timingCategories: timingCategories})
     }, 1000);
 
     this.setState({ statePage: 1, intervalId: intervalId}) 
@@ -50,7 +53,7 @@ class WorkerPage extends Component {
     if(this.state.statePage === 0){
       Page = <Instrucciones button={<button onClick={this.changeState.bind(this)}>Go Ahead</button>}/>
     }else if(this.state.statePage === 1){
-      Page = <div style={{height:"100%"}}><NavBar numberUser={this.props.user}/><AsideBar/><ChatBar numberUser={this.props.user}/><PostAndCategory numberUser={this.props.user}  change={this.changeState2.bind(this)}/></div>
+      Page = <div style={{height:"100%"}}><NavBar numberUser={this.props.user}/><AsideBar/><ChatBar numberUser={this.props.user}/><PostAndCategory numberUser={this.props.user} timing={this.state.timingCategories} change={this.changeState2.bind(this)}/></div>
     }else if(this.state.statePage === 2){
       Page = <div style={{height:"100%"}}><PagePay numberUser={this.props.user}/></div>
     };
