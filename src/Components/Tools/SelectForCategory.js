@@ -90,13 +90,31 @@ export default class SelectForCategory extends React.Component {
             <DropdownItem style={{color:"black"}} header>{"Post "+(this.props.numberP+1)}</DropdownItem>
             <DropdownItem disabled>{"Category: "+this.state.actualCategory}</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem key={0} onClick={()=>{this.setState({actualCategory:"Select Category"}); this.props.saveCategory.set("Select Category"); this.props.saveTime.set(this.props.timing); this.props.elState.set("working");}}>
-              <div style={{float:"left"}}>Select Category</div> 
+            <DropdownItem  key={0} 
+            onClick={()=>{
+              this.setState({actualCategory:"Select Category"}); 
+              this.props.saveCategory.set("Select Category"); 
+              this.props.saveTime.set(this.props.timing);
+              var newHistory = this.props.newHistory
+              newHistory.push(["Select Category", this.props.timing]);
+              this.props.saveHistory.set(newHistory) 
+              this.props.elState.set("working");
+            }}>
+            <div style={{float:"left"}}>Select Category</div> 
             </DropdownItem>
             {
               this.state.arrayCategories.map((val, ind) => {
                 return(
-                  <DropdownItem key={ind} onClick={()=>{this.setState({actualCategory:val}); this.props.saveCategory.set(val); this.props.saveTime.set(this.props.timing); this.props.elState.set("working");}}>
+                  <DropdownItem key={ind} 
+                  onClick={()=>{
+                    this.setState({actualCategory:val}); 
+                    this.props.saveCategory.set(val); 
+                    this.props.saveTime.set(this.props.timing);
+                    var newHistory = this.props.newHistory
+                    newHistory.push([val, this.props.timing]);
+                    this.props.saveHistory.set(newHistory)
+                    this.props.elState.set("working");
+                  }}>
                       <div style={{float:"left"}}>{val}</div> 
                       <div style={numeroEstadistico}>{this.state.categoriasPopularty[val]} <Icon size={12} icon={arrowUp}/></div>
                   </DropdownItem>

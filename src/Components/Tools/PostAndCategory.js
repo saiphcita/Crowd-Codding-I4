@@ -88,22 +88,29 @@ class PostAndCategory extends Component {
             todasLasCategorias = Object.keys(todasLasCategorias).map((val)=>{return val})
             const refUserCategorySelected = dbUser.ref("Users/"+this.props.numberUser+"/PostAndCategory/Post/"+ind+"/category/")
             const refUserCategoryTime = dbUser.ref("Users/"+this.props.numberUser+"/PostAndCategory/Post/"+ind+"/time/")
+            const refUserCategoryHistory = dbUser.ref("Users/"+this.props.numberUser+"/PostAndCategory/Post/"+ind+"/history/")
             const refUserSate= dbUser.ref("Users/"+this.props.numberUser+"/UserState")
             //Aqui termina lo de Select Category y Estadistica
+            var newHistory = val.history
             return (
               <div key={ind} className="NCClist">
                 <li key={ind} style={{width:"3.5%", maxWidth:"3.5%", textAlign:"center", padding:"0"}}>{ind+1}</li>
                 <li key={val.post} style={{width:"70%", maxWidth:"70%"}}>{val.post}</li>
                 <li style={{width:"25.5%", maxWidth:"25.5%", padding:"0", margin:"0"}}>
-                  <SelectForCategory
+                <SelectForCategory
+                  //CAMBIO DE TIEMPO
                   saveTime={refUserCategoryTime}
                   timing={this.props.timing}
+                  //CAMBIO DE CATEGORIA
                   saveCategory={refUserCategorySelected} 
                   categorias={todasLasCategorias} 
                   numberP={ind} 
                   actual={this.state.post[ind].category}
                   Change={()=>{this.setState({messageFinish:<div/>}); this.setState({heightPC: "88%"});}}
                   elState={refUserSate}
+                  //AGREGAR EL CAMBIO AL HISTORIAL
+                  newHistory={newHistory}
+                  saveHistory={refUserCategoryHistory}               
                   />
                 </li>
               </div>
