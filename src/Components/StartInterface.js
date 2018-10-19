@@ -30,7 +30,7 @@ class StartInterface  extends Component {
         });
         refGeneralPosts.on("value", (snapshot) => {
             let posts = snapshot.val();
-            posts = posts.map(i => { return {"category": "Select Category", "post": i }})
+            posts = posts.map(i => { return {"category": "Select Category", "post": i, "time":0, "history":[["Select Category", 0]] }})
             this.setState({posts : posts})
         });
         refGeneralCategory.on("value", (snapshot) => {
